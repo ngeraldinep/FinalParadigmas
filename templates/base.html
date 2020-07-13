@@ -1,0 +1,61 @@
+{% extends "bootstrap/base.html" %}
+
+{% block head %}
+    {{ super() }}
+    <link rel="shortcut icon" href="{{ url_for('static', filename = 'favicon.png') }}" type="image/x-icon">
+    <link rel="icon" href="{{ url_for('static', filename = 'favicon.png') }}" type="image/x-icon">
+{% endblock %}
+
+{% block title %}Hola {{ nombre }}{% endblock %}
+
+{% block navbar %}
+<div class="navbar navbar-inverse" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Flog</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/"style="color: #FFFFFF;font-size: 19px;font-family:'segoe ui';">Inicio</a></li>
+                <li><a href="/saludar" style="color: #04B45F;font-size: 19px;font-family:'segoe ui';">Say Hi!</a></li>
+                {% if 'username' in session %}
+                <li><a href="/clientes" style="color: #FF0080;font-size: 19px;font-family:'segoe ui';">Listado de Clientes</a></li>
+                <li><a href="/ccxpais" style="color: #FF0080;font-size: 19px;font-family:'segoe ui';">Consultar Clientes Por Pais</a></li>
+                <li><a href="/ccxedad" style="color: #FF0080;font-size: 19px;font-family:'segoe ui';">Consultar Clientes Por Edad</a></li>
+                <li><a href="/ccxfecha" style="color: #FF0080;font-size: 19px;font-family:'segoe ui';">Consultar Clientes Por Fecha</a></li>
+                <li><a href="/agregarcliente" style="color: #FF0080;font-size: 19px;font-family:'segoe ui';">Agregar Cliente</a></li>
+                <li><a href="/agregarproducto" style="color: #2E9AFE;font-size: 19px;font-family:'segoe ui';">Agregar Producto</a></li>
+                <li><a href="/producto" style="color: #2E9AFE;font-size: 19px;font-family:'segoe ui';">Listado de Productos</a></li>
+                <li><a href="/logout" style="color: #FF8000;font-size: 19px;font-family:'segoe ui';">Exit</a></li>
+                {% else %}
+                <li><a href="/ingresar" style="color: #2E9AFE;font-size: 19px;font-family:'segoe ui';">Ingresar</a></li>
+                <li><a href="/registrar" style="color: #FF0080;font-size: 19px;font-family:'segoe ui';">Registrarse</a></li>
+                {% endif %}
+                <li><a href="/Sobre" style="color: #D7DF01;font-size: 19px;font-family:'segoe ui';" >Sobre</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    {% for message in get_flashed_messages() %}
+    <div class="alert alert-warning">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% block page_content %}{% endblock %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+{% endblock %}
